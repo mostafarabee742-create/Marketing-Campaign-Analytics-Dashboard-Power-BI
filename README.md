@@ -53,7 +53,9 @@ Credit Card remained the most preferred and most stable payment method.
 
 Author
 Mostafa Rabee
+
 Data Analyst | Power BI | SQL | Python
+
 Open to collaborations, feedback, and professional connections.
 
 Monthly purchase patterns
