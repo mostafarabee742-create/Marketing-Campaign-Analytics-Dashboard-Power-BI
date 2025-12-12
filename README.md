@@ -1,63 +1,166 @@
-# Marketing-Campaign-Analytics-Dashboard-Power-BI
+Marketing Analytics Project – Customer Segmentation & Campaign Performance
+Overview
 
-Overview:
+This project presents a complete end-to-end Marketing Analytics solution built using SQL, Data Modeling, and Power BI. The goal is to understand customer behavior, evaluate campaign performance, and provide actionable insights to support data-driven marketing decisions.
 
-This project presents an end-to-end analytical solution designed to evaluate the performance of marketing campaigns, customer behavior, and sales dynamics. The dashboard provides a structured view of how discounts, campaign channels, customer loyalty, and city demographics influence overall business performance.
+The project includes:
 
-The objective is to help decision-makers quickly identify growth opportunities, understand customer patterns, and assess which marketing efforts deliver the highest ROI.
+Data cleaning and transformation
 
-Modeling & Measures:
+Star schema modeling
 
-The model includes a series of well-structured DAX measures covering:
-Revenue calculations
-Discount impact analytics
-Customer segmentation KPIs
-Channel performance metrics
-Time-series calculations
+Segmentation logic (behavioral + response)
 
-These measures serve as the foundation for all insights across the dashboard pages.
+DAX measures for KPI calculations
 
-Dashboard Pages:
+Interactive Power BI dashboard
 
-1. Customer Analysis
+Key insights for business decision-making
 
-A complete view of customer behavior, covering:
-Distribution by gender, city, and loyalty segment
-Average revenue per customer
-Customer acquisition timeline
-Segmentation patterns across demographics
+1. Dataset
 
-2. Campaign Performance
-   
-Deep evaluation of how campaigns performed, focusing on:
-Purchases with vs. without discount
-Conversion rates driven by discount strategies
-Channel effectiveness comparison
-Campaign-level behavioral insights
+The dataset contains customer demographic data, purchase history, marketing campaign interactions, discounts, web behavior, and product category spending.
 
-3. Sales & Revenue
-   
-A financial perspective on business activity including:
-Total revenue trends
-Payment method preferences
+Key fields include:
+
+Purchases (store, web, catalog)
+
+Product category spend (Fruits, Meat, Gold, etc.)
+
+Recency / Web visits
+
+Campaign responses
+
+Income, age, marital status
+
+Complaint records
+
+2. Data Engineering & SQL Modeling
+
+The data was transformed and structured using SQL views to create a clean analytical model.
+
+Fact Table – marketing_table
+
+Includes:
+
+Customer spend across categories
+
+Campaign acceptance flags
+
+Discounts & visit activity
+
+Recency score
+
+Age & age grouping
+
+Total purchase metrics
+
+Calculated fields such as Total_spend, Campaign_Acceptance_Score, Recency_Segment
+
+Dimensions
+Behavioral_Segmentation
+
+Segmentation based on:
+
+Purchase channel (In-Store, Online, Catalog)
+
+Discount sensitivity (High / Medium / Low)
+
+Web engagement (High / Medium / Low)
+
+Response Dimension
+
+Categorizes customers by:
+
+Campaign Acceptance Score
+
+Response Category (High / Medium / Low / Non-Responsive)
+
+Date Dimension
+
+Supports Year, Quarter, Month, and time-series analysis.
+
+SQL scripts for all transformations are included in the repository.
+
+3. Data Model
+
+A structured Star Schema was developed:
+
+          Behavioral_Segmentation     Response
+                    |                     |
+                    |                     |
+                    -------- Fact Table -------
+                              |
+                              |
+                           Date DIM
 
 
-Key Insights:
+This model enables clean, efficient filtering and multi-dimensional analysis.
 
-The dashboard highlights several important findings:
-Discount-driven campaigns generated significantly higher conversions.
-Loyalty levels have a direct and measurable impact on total revenue.
-City clusters contribute unevenly, with some locations outperforming the rest by a wide margin.
-Social Media channels achieved the strongest performance in terms of engagement and purchase response.
-Credit Card remained the most preferred and most stable payment method.
+4. DAX Measures
 
-Author
-Mostafa Rabee
+A complete DAX layer was created to support dashboard calculations, including:
 
-Data Analyst | Power BI | SQL | Python
+Total Purchases
 
-Open to collaborations, feedback, and professional connections.
+Total Purchases with Discount
 
-Monthly purchase patterns
+Total Accepted Campaigns
 
-High-value segments and repeat buyers
+Product-category spend KPIs
+
+Income-based aggregations
+
+Multi-year sales metrics
+
+Campaign-specific acceptance rates
+
+These measures form the backbone of the analytics and visual insights.
+
+5. Dashboard & Insights
+
+The Power BI dashboard delivers a comprehensive view of customer behavior and marketing performance.
+
+Key Insights Identified
+
+Highly engaged customers (10+ monthly web visits) showed the strongest campaign responsiveness and frequent cross-category purchases.
+
+Customers aged 35–50 demonstrated the highest acceptance across multiple campaigns.
+
+In-store buyers represented the most valuable customer group, while online buyers showed higher discount sensitivity.
+
+Revenue was mainly driven by Meat, Gold, and Fruits categories.
+
+At-risk and lost segments indicated clear opportunities for targeted reactivation campaigns.
+
+6. Project Files
+
+Create tables queries.sql – SQL transformations and view creation
+
+marketing_project.pbix – Power BI data model and dashboard
+
+README.md – Project documentation
+
+7. Tools & Technologies
+
+SQL – Data transformation & segmentation logic
+
+Power BI – Modeling, DAX, visualization
+
+Data Modeling – Star Schema architecture
+
+DAX – Business KPIs & analytical measures
+
+8. How to Use
+
+Run the SQL scripts to generate the fact and dimension views.
+
+Load the views into Power BI.
+
+Refresh the model and explore the dashboards.
+
+Customize the measures or add additional segmentation if needed.
+
+9. Contact
+
+For any questions or collaboration opportunities, feel free to reach out.
