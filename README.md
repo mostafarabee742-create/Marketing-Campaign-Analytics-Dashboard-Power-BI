@@ -1,166 +1,274 @@
-Marketing Analytics Project – Customer Segmentation & Campaign Performance
-Overview
+# 📣 Marketing Campaign Analytics Dashboard — SQL + Power BI
 
-This project presents a complete end-to-end Marketing Analytics solution built using SQL, Data Modeling, and Power BI. The goal is to understand customer behavior, evaluate campaign performance, and provide actionable insights to support data-driven marketing decisions.
+<div align="center">
 
-The project includes:
+![Dashboard Preview](Page%201.png)
 
-Data cleaning and transformation
+[![Power BI](https://img.shields.io/badge/Built%20with-Power%20BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)](https://powerbi.microsoft.com)
+[![SQL](https://img.shields.io/badge/SQL-Data%20Engineering-CC2927?style=for-the-badge&logo=microsoftsqlserver&logoColor=white)](.)
+[![Star Schema](https://img.shields.io/badge/Data%20Model-Star%20Schema-0078D4?style=for-the-badge)](.)
+[![DAX](https://img.shields.io/badge/DAX-Advanced%20Measures-28A745?style=for-the-badge)](.)
 
-Star schema modeling
+> **A full end-to-end marketing analytics solution** — from raw data to SQL engineering, star schema modeling, customer segmentation, and a 5-page interactive Power BI dashboard that drives smarter campaign decisions.
 
-Segmentation logic (behavioral + response)
+</div>
 
-DAX measures for KPI calculations
+---
 
-Interactive Power BI dashboard
+## 📊 Dashboard Previews
 
-Key insights for business decision-making
+| Page 1 | Page 2 | Page 3 |
+|--------|--------|--------|
+| ![Page 1](Page%201.png) | ![Page 2](Page%202.png) | ![Page 3](Page%203.png) |
 
-1. Dataset
+| Page 4 | Page 5 | Data Model |
+|--------|--------|------------|
+| ![Page 4](Page%204.png) | ![Page 5](Page%205.png) | ![Model](Data%20modeling.png) |
 
-The dataset contains customer demographic data, purchase history, marketing campaign interactions, discounts, web behavior, and product category spending.
+---
 
-Key fields include:
+## 🔍 Project Overview
 
-Purchases (store, web, catalog)
+Marketing teams run dozens of campaigns every year — but without proper analytics, they have no idea which ones work, who responds, or where the money goes. This project solves that by building a complete analytics pipeline from the ground up:
 
-Product category spend (Fruits, Meat, Gold, etc.)
+**Raw CSV Data → SQL Transformation → Star Schema → Power BI Dashboard → Actionable Insights**
 
-Recency / Web visits
+### 🎯 Business Questions Answered
+- Which customer segments respond best to marketing campaigns?
+- What drives campaign acceptance — age, income, channel, or behavior?
+- Which product categories generate the most revenue?
+- Who are the at-risk customers and how do we reactivate them?
+- How does discount sensitivity vary across customer groups?
 
-Campaign responses
+---
 
-Income, age, marital status
+## 🏗️ Project Architecture
 
-Complaint records
+```
+┌─────────────────────────────────────────────────────────┐
+│                    DATA PIPELINE                        │
+│                                                         │
+│  marketing_data.csv                                     │
+│         │                                               │
+│         ▼                                               │
+│  SQL Transformation (Create tables queries.sql)         │
+│         │                                               │
+│         ▼                                               │
+│  ┌──────────────────────────────────────┐               │
+│  │         STAR SCHEMA MODEL            │               │
+│  │                                      │               │
+│  │  Behavioral_Segmentation ──┐         │               │
+│  │                            ▼         │               │
+│  │  Response Dimension ──► FACT TABLE   │               │
+│  │                            ▲         │               │
+│  │  Date Dimension ───────────┘         │               │
+│  └──────────────────────────────────────┘               │
+│         │                                               │
+│         ▼                                               │
+│  Power BI Dashboard (5 Pages + DAX Layer)               │
+└─────────────────────────────────────────────────────────┘
+```
 
-2. Data Engineering & SQL Modeling
+---
 
-The data was transformed and structured using SQL views to create a clean analytical model.
+## 🗄️ Data Engineering — SQL Layer
 
-Fact Table – marketing_table
+This project goes beyond Power BI — the data was first **engineered using SQL** to create a clean, optimized analytical model before any visualization.
 
-Includes:
+### Fact Table — `marketing_table`
 
-Customer spend across categories
+| Field | Description |
+|-------|-------------|
+| Customer spend by category | Fruits, Meat, Gold, Fish, Sweets, Wines |
+| Campaign acceptance flags | 6 campaign response indicators |
+| Purchase channels | Store, Web, Catalog counts |
+| Recency Score | Days since last purchase |
+| Total_spend | Calculated aggregate spend |
+| Campaign_Acceptance_Score | Composite responsiveness score |
+| Recency_Segment | Hot / Warm / Cold classification |
 
-Campaign acceptance flags
+### Dimension Tables
 
-Discounts & visit activity
+**Behavioral Segmentation Dimension**
+Classifies each customer across 3 axes:
 
-Recency score
+```
+Purchase Channel    →  In-Store / Online / Catalog
+Discount Sensitivity →  High / Medium / Low
+Web Engagement      →  High / Medium / Low
+```
 
-Age & age grouping
+**Response Dimension**
+Groups customers by campaign responsiveness:
 
-Total purchase metrics
+```
+High Responsive     →  Accepted 4–6 campaigns
+Medium Responsive   →  Accepted 2–3 campaigns
+Low Responsive      →  Accepted 1 campaign
+Non-Responsive      →  Accepted 0 campaigns
+```
+
+**Date Dimension**
+Supports Year, Quarter, Month, and full time-series trend analysis.
+
+---
+
+## 📈 Key Insights from the Analysis
+
+**1. 🎯 Age 35–50 is the Sweet Spot**
+Customers in this age group showed the highest campaign acceptance rates across multiple campaigns — making them the primary target demographic for future marketing spend.
+
+**2. 🛒 In-Store Buyers = Most Valuable Segment**
+In-store customers had the highest total spend and lowest discount sensitivity — meaning they buy at full price and do so consistently. These are your premium customers.
+
+**3. 💻 Online Buyers = Discount Hunters**
+Online buyers showed significantly higher discount sensitivity. Sending them full-price campaigns is inefficient — they respond best to promotional offers.
+
+**4. 📦 Revenue Concentration in 3 Categories**
+```
+Meat    →  Highest revenue category
+Gold    →  Second highest, strong cross-campaign demand
+Fruits  →  Consistent performer across all segments
+```
+
+**5. 🌐 High Web Engagement = High Campaign Response**
+Customers with 10+ monthly web visits showed the strongest responsiveness to campaigns AND the highest cross-category purchase behavior — a clear signal for digital retargeting strategies.
+
+**6. ⚠️ At-Risk Segments Need Reactivation**
+A clear cluster of "lost" and "at-risk" customers was identified in the segmentation. These represent low-hanging fruit for reactivation campaigns with personalized offers.
+
+---
+
+## 💼 Dashboard Pages Breakdown
+
+### 📄 Page 1 — Campaign Overview
+High-level KPIs: total customers, total spend, campaign acceptance rates, and revenue by product category.
+
+### 📄 Page 2 — Customer Segmentation
+Behavioral clustering — in-store vs. online vs. catalog buyers, discount sensitivity distribution, and web engagement levels.
+
+### 📄 Page 3 — Campaign Performance
+Campaign-by-campaign acceptance rates, demographic breakdown of responders, and multi-campaign acceptance analysis.
+
+### 📄 Page 4 — Product & Revenue Analysis
+Category-level revenue breakdown, cross-category purchase patterns, and spend trends by customer segment.
+
+### 📄 Page 5 — Customer Lifecycle & Recency
+Recency segmentation (Hot / Warm / Cold), at-risk customer identification, and reactivation opportunity sizing.
+
+---
+
+## ⚙️ Key DAX Measures Used
+
+```dax
+-- Total Campaign Acceptance Rate
+Campaign Acceptance Rate =
+DIVIDE(
+    COUNTROWS(FILTER(Fact, Fact[Campaign_Acceptance_Score] > 0)),
+    COUNTROWS(Fact)
+)
+
+-- High Value Customer Segment
+High Value Customers =
+CALCULATE(
+    COUNTROWS(Fact),
+    Fact[Total_spend] >= PERCENTILE.INC(Fact[Total_spend], 0.75)
+)
 
-Calculated fields such as Total_spend, Campaign_Acceptance_Score, Recency_Segment
+-- Recency Segmentation
+Recency Segment =
+SWITCH(
+    TRUE(),
+    Fact[Recency] <= 30, "Hot",
+    Fact[Recency] <= 90, "Warm",
+    "Cold"
+)
 
-Dimensions
-Behavioral_Segmentation
+-- Discount Sensitivity Score
+Discount Sensitivity =
+DIVIDE([Total Purchases with Discount], [Total Purchases])
+```
 
-Segmentation based on:
+---
 
-Purchase channel (In-Store, Online, Catalog)
+## 🛠️ Technical Stack
 
-Discount sensitivity (High / Medium / Low)
+```
+📁 Project Structure
+├── 🗄️ Create tables queries.sql       # SQL views & transformations
+├── 🗄️ SQLQuery1.sql                   # Additional SQL queries
+├── 📊 marketing project.pbix          # Power BI dashboard (5 pages)
+├── 📂 marketing_data.csv              # Raw source data
+├── 📂 marketing_data_dictionary.csv   # Data dictionary
+├── 🖼️ Data modeling.png               # Star schema diagram
+├── 🖼️ Page 1.png                      # Dashboard screenshot
+├── 🖼️ Page 2.png                      # Dashboard screenshot
+├── 🖼️ Page 3.png                      # Dashboard screenshot
+├── 🖼️ Page 4.png                      # Dashboard screenshot
+├── 🖼️ Page 5.png                      # Dashboard screenshot
+└── 📖 README.md
+```
 
-Web engagement (High / Medium / Low)
+### Tools & Technologies
+- **SQL (T-SQL)** — Data transformation, view creation, segmentation logic
+- **Power BI Desktop** — 5-page interactive dashboard
+- **DAX** — Advanced KPIs, segmentation measures, time intelligence
+- **Data Modeling** — Star schema architecture
+- **Power Query** — Data cleaning and loading pipeline
+- **CSV / Excel** — Source data format
 
-Response Dimension
+---
 
-Categorizes customers by:
+## 🚀 How to Use
 
-Campaign Acceptance Score
+1. **Clone this repository**
+   ```bash
+   git clone https://github.com/mostafarabee742-create/Marketing-Campaign-Analytics-Dashboard-Power-BI.git
+   ```
 
-Response Category (High / Medium / Low / Non-Responsive)
+2. **Set up the database**
+   - Open SQL Server Management Studio (SSMS)
+   - Run `Create tables queries.sql` to generate the fact and dimension views
+   - Run `SQLQuery1.sql` for additional transformations
 
-Date Dimension
+3. **Open the dashboard**
+   - Install [Power BI Desktop](https://powerbi.microsoft.com/desktop/) (free)
+   - Open `marketing project.pbix`
+   - Update the data source connection to point to your SQL Server
 
-Supports Year, Quarter, Month, and time-series analysis.
+4. **Explore the data**
+   - Navigate across all **5 pages** using the bottom tabs
+   - Use **segment slicers** to filter by behavioral group, age, or campaign
+   - Click any visual to cross-filter the entire page
 
-SQL scripts for all transformations are included in the repository.
+---
 
-3. Data Model
+## 🎓 Skills Demonstrated
 
-A structured Star Schema was developed:
+- **SQL Engineering** — Writing views, transformations, and segmentation logic from scratch
+- **Star Schema Design** — Fact and dimension table architecture for optimal BI performance
+- **Customer Segmentation** — Behavioral, recency, and response-based clustering
+- **DAX** — Advanced calculated measures, KPIs, and dynamic segmentation
+- **Data Visualization** — 5-page storytelling dashboard with cross-filtering
+- **Business Intelligence** — Translating marketing data into revenue-driving recommendations
 
-          Behavioral_Segmentation     Response
-                    |                     |
-                    |                     |
-                    -------- Fact Table -------
-                              |
-                              |
-                           Date DIM
+---
 
+## 📬 Contact
 
-This model enables clean, efficient filtering and multi-dimensional analysis.
+**Author:** Mostafa Rabee
+**Role:** Data Analyst
+**LinkedIn:** [linkedin.com/in/mostafa-rabee74](https://www.linkedin.com/in/mostafa-rabee74)
+**Email:** [mostafarabee742@gmail.com](mailto:mostafarabee742@gmail.com)
+**GitHub:** [github.com/mostafarabee742-create](https://github.com/mostafarabee742-create)
 
-4. DAX Measures
+---
 
-A complete DAX layer was created to support dashboard calculations, including:
+<div align="center">
 
-Total Purchases
+⭐ **If you found this project useful, please give it a star!** ⭐
 
-Total Purchases with Discount
+*Built with ❤️ by Mostafa Rabee | Data Analyst*
+*From Raw Data to Marketing Intelligence*
 
-Total Accepted Campaigns
-
-Product-category spend KPIs
-
-Income-based aggregations
-
-Multi-year sales metrics
-
-Campaign-specific acceptance rates
-
-These measures form the backbone of the analytics and visual insights.
-
-5. Dashboard & Insights
-
-The Power BI dashboard delivers a comprehensive view of customer behavior and marketing performance.
-
-Key Insights Identified
-
-Highly engaged customers (10+ monthly web visits) showed the strongest campaign responsiveness and frequent cross-category purchases.
-
-Customers aged 35–50 demonstrated the highest acceptance across multiple campaigns.
-
-In-store buyers represented the most valuable customer group, while online buyers showed higher discount sensitivity.
-
-Revenue was mainly driven by Meat, Gold, and Fruits categories.
-
-At-risk and lost segments indicated clear opportunities for targeted reactivation campaigns.
-
-6. Project Files
-
-Create tables queries.sql – SQL transformations and view creation
-
-marketing_project.pbix – Power BI data model and dashboard
-
-README.md – Project documentation
-
-7. Tools & Technologies
-
-SQL – Data transformation & segmentation logic
-
-Power BI – Modeling, DAX, visualization
-
-Data Modeling – Star Schema architecture
-
-DAX – Business KPIs & analytical measures
-
-8. How to Use
-
-Run the SQL scripts to generate the fact and dimension views.
-
-Load the views into Power BI.
-
-Refresh the model and explore the dashboards.
-
-Customize the measures or add additional segmentation if needed.
-
-9. Contact
-
-For any questions or collaboration opportunities, feel free to reach out.
+</div>
